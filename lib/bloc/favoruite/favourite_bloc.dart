@@ -43,7 +43,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteItemState> {
     }
 
     favouriteList[index] = event.item;
-    emit(state.copyWith(favouriteItemList:List.from(favouriteList)));
+    emit(state.copyWith(favouriteItemList:List.from(favouriteList), temFavouriteItemList: List.from(tempFavouriteList)));
   }
 
   void _selectItem(SelectItem event, Emitter<FavouriteItemState> emit) async{
