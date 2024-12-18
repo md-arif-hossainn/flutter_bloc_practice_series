@@ -21,7 +21,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
     return  Scaffold(
       body: Center(
         child: BlocBuilder<ImagePickerBloc , ImagePickerState>(
-          buildWhen: (previous, current) =>previous.file != current.file,
             builder: (context, state){
               return state.file == null ? InkWell(
                 onTap: (){
@@ -32,7 +31,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                   child: Icon(Icons.camera),
 
                 ),
-              ) : Image.file(File(state.file!.path.toString()),height: 200,width: 200,);
+              ) : Image.file(File(state.file!.path.toString()),height: 500,width: double.infinity);
             }
         ),
       ),
@@ -44,7 +43,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                 ? const Icon(Icons.image)
                 : Image.file(
               File(state.file!.path.toString()),
-              height: 500,
+              height: 100,
               width: 500,
             );
           },
