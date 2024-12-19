@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => CounterBloc()),
+        //BlocProvider(create: (_) => CounterBloc()),
         BlocProvider(create: (_) => SwitchBloc()),
         BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtils())),
         BlocProvider(create: (_) => ToDoBloc()),
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //home: const CounterScreen(),
-        home: const PostsScreen(),
+        home: const CounterScreen(),
       ),
     );
   }
