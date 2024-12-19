@@ -34,15 +34,45 @@ class _PostsScreenState extends State<PostsScreen> {
             case PostStatus.failure:
               return Center(child: Text(state.message));
             case PostStatus.success:
-              return ListView.builder(
-                  itemCount: state.postList.length,
-                  itemBuilder: (context,index){
-                    final item = state.postList[index];
-                    return ListTile(
-                      title: Text(item.title.toString()),
-                      subtitle: Text(item.body.toString()),
-                    );
-                  }
+              return Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: 'Search with email',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (filterKey){
+                      context.read<PostBloc>().add(SearchItem(filterKey));
+                    },
+                  ),
+                  Expanded(
+                    child: state.searchMessage.isNotEmpty ?
+                        Center(child: Text(state.searchMessage.toString())) :
+                    ListView.builder(
+                        itemCount: state.tempPostList.isEmpty ? state.postList.length : state.tempPostList.length,
+                        itemBuilder: (context,index){
+
+                          if (state.tempPostList.isNotEmpty) {
+                            final item = state.tempPostList[index];
+                            return Card(
+                              child: ListTile(
+                                title: Text(item.email.toString()),
+                                subtitle: Text(item.body.toString()),
+                              ),
+                            );
+                          }else{
+                            final item = state.postList[index];
+                            return Card(
+                              child: ListTile(
+                                title: Text(item.email.toString()),
+                                subtitle: Text(item.body.toString()),
+                              ),
+                            );
+                          }
+                        }
+                    ),
+                  ),
+                ],
               );
           }
         },

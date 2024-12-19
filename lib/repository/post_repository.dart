@@ -15,7 +15,7 @@ class PostRepository {
 
     try {
 
-      final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts')).timeout( const Duration(seconds: 10 ));
+      final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/comments')).timeout( const Duration(seconds: 10 ));
       final body = json.decode(response.body) as List;
       if (kDebugMode) {
         print(response.statusCode.toString());
@@ -26,9 +26,10 @@ class PostRepository {
         return  body.map((dynamic json) {
           final map = json as Map<String, dynamic>;
           return  PostModel(
-            userId: map['userId'] as int,
+            postId: map['postId'] as int,
             id: map['id'] as int,
-            title: map['title'] as String,
+            name: map['name'] as String,
+            email: map['email'] as String,
             body: map['body'] as String,
           );
         }).toList();
